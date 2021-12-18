@@ -26,4 +26,12 @@ router.post("/", (req, res, next) => {
     .catch(next);
 });
 
+router.delete("/:id", (req, res, next) => {
+  Users.deleteUser(req.params.id)
+    .then((deletedUser) => {
+      res.json(deletedUser);
+    })
+    .catch(next);
+});
+
 module.exports = router;
