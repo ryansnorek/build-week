@@ -2,11 +2,16 @@ const db = require("../data/db-config");
 
 module.exports = {
   getAllUsers,
+  getUserById,
   insertUser,
 };
 
 function getAllUsers() {
   return db("users");
+}
+
+function getUserById(id) {
+  return db("users").where("user_id", id);
 }
 
 async function insertUser(user) {
