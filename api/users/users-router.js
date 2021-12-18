@@ -19,7 +19,11 @@ router.get("/:id", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  res.json("get by id");
+  Users.insertUser(req.body)
+    .then((newUser) => {
+      res.json(newUser);
+    })
+    .catch(next);
 });
 
 module.exports = router;
