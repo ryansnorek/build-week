@@ -29,18 +29,24 @@ function getPlantsByUserId(user_id) {
 }
 
 async function createUser(user) {
-  const [newUser] = await db("users").insert(user, [
-    "user_id",
-    "username",
-    "password",
-    "phone",
-  ]);
+  const [newUser] = await db("users")
+    .insert(user, [
+        "user_id",
+        "username",
+        "password",
+        "phone",
+    ]);
   return newUser;
 }
 
 async function deleteUser(id) {
   const [deletedUser] = await db("users")
     .where("user_id", id)
-    .delete(["user_id", "username", "password", "phone"]);
+    .delete([
+        "user_id", 
+        "username", 
+        "password", 
+        "phone"
+    ]);
   return deletedUser;
 }

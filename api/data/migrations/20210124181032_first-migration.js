@@ -18,15 +18,18 @@ exports.up = async (knex) => {
       plants.integer('user_id').unsigned()
         .references('user_id')
         .inTable('users')
+        .onDelete('CASCADE')
     })
     .createTable('user_plants', (user_plants) => {
       user_plants.increments('user_plant_id')
       user_plants.integer('user_id').notNullable()
         .references('user_id')
         .inTable('users')
+        .onDelete("CASCADE")
       user_plants.integer('plant_id').notNullable()
         .references('plant_id')
         .inTable('plants')
+        .onDelete('CASCADE')
     })
 }
 
