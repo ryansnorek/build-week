@@ -10,7 +10,7 @@ exports.up = async (knex) => {
     .createTable('plants', (plants) => {
       plants.increments('plant_id')
       plants.string('nickname', 200).notNullable().unique()
-      plants.string('species', 200).notNullable()
+      plants.string('species', 200)
       plants.integer('h2o_frequency', 10)
       plants.text('image_url', 1000)
       plants.timestamps(false, true)

@@ -1,4 +1,5 @@
 const db = require("../data/db-config");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
   getAllUsers,

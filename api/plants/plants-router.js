@@ -1,5 +1,6 @@
 const router = require("express").Router();
-
+const restricted = require("../restricted/middleware");
+const { reqBodyIsValid, checkIfPlantExists } = require("./plants-middleware");
 const Plants = require("./plants-model");
 
 router.get("/", (req, res, next) => {
@@ -10,22 +11,19 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
-router.get("/:id", (req, res, next) => {
-  Plants.getPlantById(req.params.id)
-    .then((plant) => {
-      res.json(plant);
-    })
-    .catch(next);
+router.get("/:id", checkIfPlantExists, (req, res, next) => {
+  res.json(req.plant);
 });
 
-router.post("/", (req, res, next) => {
+// restricted
+router.post("/", reqBodyIsValid, (req, res, next) => {
   Plants.createPlant(req.body)
     .then((newPlant) => {
       res.json(newPlant);
     })
     .catch(next);
 });
-
+// restricted
 router.put("/:id", (req, res, next) => {
   Users.updatePlant(req.body, req.params.id)
     .then((updatedPlant) => {
@@ -33,7 +31,7 @@ router.put("/:id", (req, res, next) => {
     })
     .catch(next);
 });
-
+// restricted
 router.delete("/:id", (req, res, next) => {
   Plants.deletePlant(req.params.id)
     .then((deletedPlant) => {
