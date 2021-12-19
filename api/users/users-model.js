@@ -3,17 +3,18 @@ const db = require("../data/db-config");
 module.exports = {
   getAllUsers,
   getUserById,
-  createUser,
-  deleteUser,
   getPlantsByUserId,
+  createUser,
+  updateUser,
+  deleteUser,
 };
 
 function getAllUsers() {
   return db("users");
 }
 
-function getUserById(id) {
-  return db("users").where("user_id", id);
+function getUserById(user_id) {
+  return db("users").where("user_id", user_id);
 }
 
 function getPlantsByUserId(user_id) {
@@ -39,9 +40,21 @@ async function createUser(user) {
   return newUser;
 }
 
-async function deleteUser(id) {
+async function updateUser(user, user_id) {
+  const [updatedUser] = await db("users")
+    .where("user_id", user_id)
+    .update(user, [
+        "user_id",
+        "username",
+        "password",
+        "phone",
+    ]);
+  return updatedUser;
+}
+
+async function deleteUser(user_id) {
   const [deletedUser] = await db("users")
-    .where("user_id", id)
+    .where("user_id", user_id)
     .delete([
         "user_id", 
         "username", 

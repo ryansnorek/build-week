@@ -34,6 +34,14 @@ router.post("/", (req, res, next) => {
     .catch(next);
 });
 
+router.put("/:id", (req, res, next) => {
+    Users.updateUser(req.body, req.params.id)
+        .then((updatedUser) => {
+            res.json(updatedUser);
+        })
+        .catch(next);
+});
+
 router.delete("/:id", (req, res, next) => {
   Users.deleteUser(req.params.id)
     .then((deletedUser) => {

@@ -11,8 +11,8 @@ function getAllPlants() {
   return db("plants");
 }
 
-function getPlantById(id) {
-  return db("plants").where("plant_id", id);
+function getPlantById(plant_id) {
+  return db("plants").where("plant_id", plant_id);
 }
 
 async function createPlant(plant) {
@@ -33,9 +33,9 @@ async function createPlant(plant) {
   return newUser;
 }
 
-async function deletePlant(id) {
+async function deletePlant(plant_id) {
   const [deletedUser] = await db("plants")
-    .where("plant_id", id)
+    .where("plant_id", plant_id)
     .delete([
      "plant_id", 
      "nickname", 
