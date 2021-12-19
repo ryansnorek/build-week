@@ -12,8 +12,12 @@ exports.up = async (knex) => {
       plants.string('nickname', 200).notNullable().unique()
       plants.string('species', 200).notNullable()
       plants.integer('h2o_frequency', 10)
+      plants.text('image_url', 1000)
       plants.timestamps(false, true)
-      plants.binary('image', 1000)
+      plants.binary('uploaded_image', 255)
+      plants.integer('user_id').unsigned()
+        .references('user_id')
+        .inTable('users')
     })
     .createTable('user_plants', (user_plants) => {
       user_plants.increments('user_plant_id')

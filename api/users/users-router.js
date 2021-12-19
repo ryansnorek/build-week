@@ -18,8 +18,16 @@ router.get("/:id", (req, res, next) => {
     .catch(next);
 });
 
+router.get("/plants/:id", (req, res, next) => {
+  Users.getPlantsByUserId(req.params.id)
+    .then((plants) => {
+      res.json(plants);
+    })
+    .catch(next);
+});
+
 router.post("/", (req, res, next) => {
-  Users.insertUser(req.body)
+  Users.createUser(req.body)
     .then((newUser) => {
       res.json(newUser);
     })
