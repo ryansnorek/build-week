@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const { checkIfUserExistsAlready } = require("./users-middleware");
 const Users = require("./users-model");
 
 router.get("/", (req, res, next) => {
@@ -22,14 +22,6 @@ router.get("/plants/:id", (req, res, next) => {
   Users.getPlantsByUserId(req.params.id)
     .then((plants) => {
       res.json(plants);
-    })
-    .catch(next);
-});
-
-router.post("/", (req, res, next) => {
-  Users.createUser(req.body)
-    .then((newUser) => {
-      res.json(newUser);
     })
     .catch(next);
 });
