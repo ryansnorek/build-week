@@ -26,7 +26,7 @@ router.post("/", reqBodyIsValid, restricted, (req, res, next) => {
 });
 
 router.put("/:id", restricted, (req, res, next) => {
-  Users.updatePlant(req.body, req.params.id)
+  Plants.updatePlant(req.body, req.params.id)
     .then((updatedPlant) => {
       res.json(updatedPlant);
     })
