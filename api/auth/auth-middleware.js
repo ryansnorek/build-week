@@ -52,7 +52,7 @@ function tokenBuilder(user) {
     };
   return jwt.sign(
       payload, 
-      JWT_SECRET,
+      process.env.JWT_SECRET,
       options,
     );
 }
