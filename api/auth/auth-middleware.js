@@ -2,7 +2,6 @@ require("dotenv").config();
 const { findUser } = require("../users/users-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
 
 module.exports = {
   reqBodyIsValid,
