@@ -4,6 +4,7 @@ module.exports = {
   getAllPlants,
   getPlantById,
   createPlant,
+  updatePlant,
   deletePlant,
 };
 
@@ -33,12 +34,30 @@ async function createPlant(plant) {
   return newUser;
 }
 
+async function updatePlant(plant, plant_id) {
+  const [updatedPlant] = await db("plants")
+    .where("plant_id", plant_id)
+    .update(plant, [
+      "plant_id",
+      "nickname",
+      "species",
+      "h2o_frequency",
+      "uploaded_image",
+      "user_id",
+    ]);
+  return updatedPlant;
+}
+
 async function deletePlant(plant_id) {
-  const [deletedUser] = await db("plants")
+  const [deletedPlant] = await db("plants")
     .where("plant_id", plant_id)
     .delete([
-     "plant_id", 
-     "nickname", 
+      "plant_id",
+      "nickname",
+      "species",
+      "h2o_frequency",
+      "uploaded_image",
+      "user_id",
     ]);
-  return deletedUser;
+  return deletedPlant;
 }

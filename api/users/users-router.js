@@ -35,11 +35,11 @@ router.post("/", (req, res, next) => {
 });
 
 router.put("/:id", (req, res, next) => {
-    Users.updateUser(req.body, req.params.id)
-        .then((updatedUser) => {
-            res.json(updatedUser);
-        })
-        .catch(next);
+  Users.updateUser(req.body, req.params.id)
+    .then((updatedUser) => {
+      res.json(updatedUser);
+    })
+    .catch(next);
 });
 
 router.delete("/:id", (req, res, next) => {
