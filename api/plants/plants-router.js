@@ -16,7 +16,7 @@ router.get("/:id", checkIfPlantExists, (req, res, next) => {
 });
 
 // restricted
-router.post("/", reqBodyIsValid, (req, res, next) => {
+router.post("/", reqBodyIsValid, restricted, (req, res, next) => {
   Plants.createPlant(req.body)
     .then((newPlant) => {
       res.json(newPlant);
@@ -24,7 +24,7 @@ router.post("/", reqBodyIsValid, (req, res, next) => {
     .catch(next);
 });
 // restricted
-router.put("/:id", (req, res, next) => {
+router.put("/:id", restricted, (req, res, next) => {
   Users.updatePlant(req.body, req.params.id)
     .then((updatedPlant) => {
       res.json(updatedPlant);
@@ -32,7 +32,7 @@ router.put("/:id", (req, res, next) => {
     .catch(next);
 });
 // restricted
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", restricted, (req, res, next) => {
   Plants.deletePlant(req.params.id)
     .then((deletedPlant) => {
       res.json(deletedPlant);
