@@ -7,18 +7,19 @@ const {
   checkIfUserExistsAlready,
   confirmAndStoreUser,
   tokenBuilder,
+  hashPassword,
 } = require("./auth-middleware");
 
 router.post(
   "/register",
   reqBodyIsValid,
   checkIfUserExistsAlready,
+  hashPassword,
   (req, res, next) => {
     const { username, password, phone } = req.body;
-    const hash = bcrypt.hashSync(password);
     Users.createUser({
       username,
-      password: hash,
+      password,
       phone,
     })
       .then((newUser) => {

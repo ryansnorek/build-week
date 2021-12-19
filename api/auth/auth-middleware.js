@@ -1,4 +1,5 @@
 const { findUser } = require("../users/users-model");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 
@@ -7,6 +8,7 @@ module.exports = {
   checkIfUserExistsAlready,
   confirmAndStoreUser,
   tokenBuilder,
+  hashPassword,
 };
 
 function reqBodyIsValid(req, res, next) {
@@ -52,4 +54,11 @@ function tokenBuilder(user) {
       JWT_SECRET,
       options,
     );
+}
+
+function hashPassword(req, res, next) {
+  if (req.body.password) {
+    req.body.password = bcrypt.hashSync(req.body.password);
+  }
+  next();
 }

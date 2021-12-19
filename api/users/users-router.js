@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { checkIfUserExistsAlready } = require("./users-middleware");
+const { hashPassword } = require("../auth/auth-middleware");
 const Users = require("./users-model");
 
 router.get("/", (req, res, next) => {
@@ -26,7 +26,7 @@ router.get("/plants/:id", (req, res, next) => {
     .catch(next);
 });
 
-router.put("/:id", (req, res, next) => {
+router.put("/:id", hashPassword, (req, res, next) => {
   Users.updateUser(req.body, req.params.id)
     .then((updatedUser) => {
       res.json(updatedUser);
