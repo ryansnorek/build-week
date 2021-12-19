@@ -1,0 +1,32 @@
+GET all users https://watermyplantz.herokuapp.com/api/users
+GET user by id https://watermyplantz.herokuapp.com/api/users/{user_id}
+GET all plants https://watermyplantz.herokuapp.com/api/plants
+GET plant by id https://watermyplantz.herokuapp.com/api/plants/{plant_id}
+POST register new user https://watermyplantz.herokuapp.com/api/auth/register
+ {
+    "username": "jimbo",
+    "password": "1234",
+    "phone": "2347072442"
+}
+POST login https://watermyplantz.herokuapp.com/api/auth/login
+{
+    "username": "jimbo",
+    "password": "1234"
+}
+(responds with token)
+
+******** token required in Header *************
+Authorization: "login_token_goes_here"
+
+POST add plant https://watermyplantz.herokuapp.com/api/plants
+{
+    "nickname": "pooky",
+    "species": "wookie",
+    "h2o_frequency": 2,
+    "user_id": 2
+}
+GET plants by user id https://watermyplantz.herokuapp.com/api/users/{user_id}/plants
+PUT update plant https://watermyplantz.herokuapp.com/api/plants/{plant_id}
+PUT update user https://watermyplantz.herokuapp.com/api/users/{user_id}
+DELETE plant https://watermyplantz.herokuapp.com/api/plants/{plant_id}
+DELETE user https://watermyplantz.herokuapp.com/api/users/{user_id}
