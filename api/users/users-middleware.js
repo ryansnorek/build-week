@@ -4,6 +4,6 @@ module.exports = {
 
 }
 
-function checkIfUserExistsAlready() {
+function checkIfUserExistsAlready(req, res, next) {
     
 }

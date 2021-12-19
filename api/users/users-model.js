@@ -3,6 +3,7 @@ const db = require("../data/db-config");
 module.exports = {
   getAllUsers,
   getUserById,
+  findUser,
   getPlantsByUserId,
   createUser,
   updateUser,
@@ -15,6 +16,10 @@ function getAllUsers() {
 
 function getUserById(user_id) {
   return db("users").where("user_id", user_id);
+}
+
+function findUser(username) {
+  return db("users").where("username", username).first();
 }
 
 function getPlantsByUserId(user_id) {

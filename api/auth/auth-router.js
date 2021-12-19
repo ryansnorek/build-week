@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
+const { BCRYPT_ROUNDS } = process.env;
 const Users = require("../users/users-model");
 
 const {
   reqBodyIsValid,
   checkIfUserExistsAlready,
-  userExistsOnLogin,
+  confirmAndStoreUser,
   tokenBuilder,
 } = require("./auth-middleware");
 
@@ -15,8 +16,12 @@ router.post(
   checkIfUserExistsAlready,
   (req, res, next) => {
     const { username, password, phone } = req.body;
-    const hash = bcrypt.hashSync(password, process.env.BCRYPT_ROUNDS);
-    Users.createUser({ username, password: hash, phone })
+    const hash = bcrypt.hashSync(password);
+    Users.createUser({
+      username,
+      password: hash,
+      phone,
+    })
       .then((newUser) => {
         res.json(newUser);
       })
@@ -27,17 +32,17 @@ router.post(
 router.post(
   "/login",
   reqBodyIsValid,
-  userExistsOnLogin,
+  confirmAndStoreUser,
   (req, res, next) => {
     const { password } = req.body;
-    const passwordMatch = bcrypt.compareSync(password, req.user.password);
-    if (!passwordMatch) {
+    const passwordMatches = bcrypt.compareSync(password, req.user.password);
+    if (!passwordMatches) {
         return next({ message: "invalid credentials" });
     }
     const token = tokenBuilder(req.user);
-    res.json({
-      message: `welcome, ${req.user.username}`,
-      token,
+    res.json({ 
+        message: `welcome, ${req.user.username}`, 
+        token 
     });
   }
 );
