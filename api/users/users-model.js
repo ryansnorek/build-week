@@ -15,7 +15,7 @@ function getAllUsers() {
 }
 
 function getUserById(user_id) {
-  return db("users").where("user_id", user_id);
+  return db("users").where("user_id", user_id).first();
 }
 
 function findUser(username) {

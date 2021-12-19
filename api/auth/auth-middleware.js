@@ -20,33 +20,36 @@ function reqBodyIsValid(req, res, next) {
 
 async function checkIfUserExistsAlready(req, res, next) {
   const user = await findUser(req.body.username);
-  !user ? next() : 
-  next({ 
-      message: "username taken", 
-      status: 422 
-    });
+  if (user) {
+    return next({ 
+        message: "username taken", 
+        status: 422 
+      });
+  }
+  next();
 }
 
 async function confirmAndStoreUser(req, res, next) {
-  const user = await getUserById(req.body.username);
-  user.length ? 
-  req.user = user[0] :
-  next({
-      message: "invalid credentials", 
-      status: 401
-  });
+  const user = await findUser(req.body.username);
+  if (!user) {
+    return next({
+        message: "invalid credentials", 
+        status: 401
+    });
+  }
+  req.user = user;
   next();
 }
 
 function tokenBuilder(user) {
   const options = { expiresIn: "1d" };
   const payload = { 
-      subject: user.id, 
+      subject: user.user_id, 
       username: user.username 
     };
   return jwt.sign(
-      options,
       payload, 
       JWT_SECRET,
+      options,
     );
 }

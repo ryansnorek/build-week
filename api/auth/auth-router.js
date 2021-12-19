@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
-const { BCRYPT_ROUNDS } = process.env;
 const Users = require("../users/users-model");
 
 const {
