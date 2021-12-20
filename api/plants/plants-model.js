@@ -28,8 +28,8 @@ async function createPlant(plant) {
   ]);
   await db("user_plants")
   .insert({ 
-    user_id: newUser.user_id,
-    plant_id: newUser.plant_id,
+    user_id: newPlant.user_id,
+    plant_id: newPlant.plant_id,
    })
   return newPlant;
 }
