@@ -17,7 +17,7 @@ function getPlantById(plant_id) {
 }
 
 async function createPlant(plant) {
-  const [newUser] = await db("plants")
+  const [newPlant] = await db("plants")
   .insert(plant, [
     "plant_id",
     "nickname",
@@ -31,7 +31,7 @@ async function createPlant(plant) {
     user_id: newUser.user_id,
     plant_id: newUser.plant_id,
    })
-  return newUser;
+  return newPlant;
 }
 
 async function updatePlant(plant, plant_id) {

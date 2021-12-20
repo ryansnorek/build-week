@@ -1,4 +1,3 @@
-// require("dotenv").config();
 const { findUser } = require("../users/users-model");
 const { JWT_SECRET } = require("../../config");
 const jwt = require("jsonwebtoken");
