@@ -1,7 +1,8 @@
-require("dotenv").config();
+// require("dotenv").config();
 const { findUser } = require("../users/users-model");
-const bcrypt = require("bcryptjs");
+const { JWT_SECRET } = require("../../config");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
   reqBodyIsValid,
@@ -51,7 +52,7 @@ function tokenBuilder(user) {
     };
   return jwt.sign(
       payload, 
-      `${process.env.JWT_SECRET}`,
+      JWT_SECRET,
       options,
     );
 }

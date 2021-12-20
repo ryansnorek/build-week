@@ -1,5 +1,6 @@
-require("dotenv").config();
+// require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../../config");
 
 module.exports = (req, res, next) => {
   const token = req.headers.authorization;
@@ -9,7 +10,7 @@ module.exports = (req, res, next) => {
         status: 401 
     });
   }
-  jwt.verify(token, `${process.env.JWT_SECRET}`, (err, decoded) => {
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) {
       return next({ 
           message: "token invalid", 
