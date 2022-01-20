@@ -1,7 +1,7 @@
 # Water My Plants
 **REST API**
 
-An app to remind you to water your plants
+An app to help remind you to water your plants
 
 Node | Express | Knex | Postgres | JWT
 
