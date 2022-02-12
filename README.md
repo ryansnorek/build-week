@@ -6,6 +6,8 @@
 Node | Express | Knex | Postgres | JWT
 
 ### Engineering Notes
-- [ ] Backend server with token authentication
+- [ ] Backend server uses token authentication
 - [ ] Handles user registration/login
 - [ ] CRUD operations for user requests
+
+
